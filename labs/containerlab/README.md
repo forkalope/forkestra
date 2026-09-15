@@ -31,6 +31,9 @@ From the `forkestra` repository root, run:
 bash scripts/bootstrap-macos.sh
 ```
 
+The bootstrap pauses before creating or preparing the VM. Approve each step;
+use `--yes` only for a reviewed unattended run.
+
 The script is safe to re-run. It creates the `ubuntu` VM only when it is
 missing, starts it when stopped, installs the VM-local prerequisites at pinned
 versions, checks Docker, and verifies that this repository is visible inside
@@ -88,6 +91,21 @@ Build the Forge image and deploy Franchise 1:
 ```bash
 bash scripts/deploy-lab.sh
 ```
+
+To practice the first-run wizard before launching the full three-node lab:
+
+```bash
+bash scripts/deploy-lab.sh --bootstrap-only
+```
+
+This publishes one node at `http://localhost:8080/forklift`. After reviewing
+the wizard, run the normal deployment command to replace it with the full
+three-node topology.
+
+Deployment also pauses before building and replacing the disposable lab. The
+Forklift Networking page is the live operator checkpoint: while fewer than
+three nodes are present it shows a setup wizard, then it settles into the node
+inventory once the lab is complete.
 
 Deploy both isolated franchise labs:
 

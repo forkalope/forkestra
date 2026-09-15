@@ -4,7 +4,7 @@ set -Eeuo pipefail
 
 usage() {
   cat <<'USAGE'
-Usage: scripts/bootstrap-macos.sh
+Usage: scripts/bootstrap-macos.sh [--yes]
 
 Create or start one OrbStack Ubuntu VM used by a Forkalope franchise,
 install that VM's Docker and Containerlab prerequisites, and verify that this
@@ -18,6 +18,9 @@ Environment overrides:
 
 The script does not deploy or destroy a lab. Use bootstrap-federation.sh to
 prepare both local franchise VMs.
+
+By default each irreversible setup step pauses for confirmation. Use --yes for
+non-interactive CI or an explicitly unattended run.
 USAGE
 }
 
@@ -30,18 +33,23 @@ die() {
   exit 1
 }
 
-if [[ $# -gt 0 ]]; then
+assume_yes=false
+while [[ $# -gt 0 ]]; do
   case "$1" in
-    -h|--help)
-      usage
-      exit 0
-      ;;
-    *)
-      usage >&2
-      exit 2
-      ;;
+    --yes) assume_yes=true ;;
+    -h|--help) usage; exit 0 ;;
+    *) usage >&2; exit 2 ;;
   esac
-fi
+  shift
+done
+
+confirm() {
+  $assume_yes && return 0
+  [[ -t 0 ]] || die "interactive confirmation required; rerun with --yes"
+  local answer
+  read -r -p "$1 [y/N] " answer
+  [[ "$answer" == "y" || "$answer" == "Y" ]]
+}
 
 case "$(uname -s)" in
   Darwin) ;;
@@ -91,10 +99,12 @@ esac
 if orbctl list -q | grep -Fxq -- "$vm_name"; then
   log "using existing OrbStack VM: $vm_name"
 else
+  confirm "Create OrbStack VM $vm_name (Ubuntu $ubuntu_version, ARM64)?" || die "VM creation cancelled"
   log "creating OrbStack VM: $vm_name (Ubuntu $ubuntu_version, ARM64)"
   orbctl create -a arm64 "ubuntu:$ubuntu_version" "$vm_name"
 fi
 
+confirm "Start and prepare VM $vm_name (Docker and Containerlab checks)?" || die "VM preparation cancelled"
 log "starting OrbStack VM: $vm_name"
 orbctl start "$vm_name"
 

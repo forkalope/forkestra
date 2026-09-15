@@ -19,9 +19,17 @@ From the repository root:
 bash scripts/bootstrap-macos.sh
 ```
 
-The bootstrap is safe to re-run. It creates or starts the selected ARM64 VM,
-checks that VM's Docker daemon, installs pinned Containerlab prerequisites, and
-verifies the shared repository path. It does not deploy or destroy a lab.
+The bootstrap is safe to re-run and pauses before creating or preparing a VM.
+Read each prompt and approve it explicitly. It creates or starts the selected
+ARM64 VM, checks that VM's Docker daemon, installs pinned Containerlab
+prerequisites, and verifies the shared repository path. It does not deploy or
+destroy a lab.
+
+For an explicitly unattended run only:
+
+```bash
+bash scripts/bootstrap-macos.sh --yes
+```
 
 ## First lab
 
@@ -36,6 +44,28 @@ To create the two-franchise exercise, use two independent OrbStack VMs:
 bash scripts/bootstrap-federation.sh
 bash scripts/deploy-lab.sh --all --reconfigure
 ```
+
+Both scripts pause before each VM or lab mutation by default. The intended
+human-in-the-loop sequence is:
+
+1. Approve the first OrbStack machine and its prerequisites.
+2. Start the first-node checkpoint:
+
+   ```bash
+   bash scripts/deploy-lab.sh --bootstrap-only
+   ```
+
+3. Open its Forklift page and walk through the setup checkpoints.
+4. Approve the default node launch plan, then deploy the full lab when ready:
+
+   ```bash
+   bash scripts/deploy-lab.sh --reconfigure
+   ```
+
+5. Return to the live node inventory and use **Add node** or **Add machine**
+   when those provisioning paths are enabled.
+
+Use `--yes` only when repeating a reviewed sequence in automation.
 
 Franchise 1 is served at [http://localhost:8080/forklift](http://localhost:8080/forklift)
 and Franchise 2 at [http://localhost:8180/forklift](http://localhost:8180/forklift).
