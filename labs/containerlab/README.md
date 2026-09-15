@@ -1,9 +1,10 @@
 # Forkalope Containerlab labs
 
-This directory starts three native ARM64 Forge nodes in the Ubuntu ARM64 VM
-managed by OrbStack. The nodes retain the three point-to-point IP links and
-also exchange an eventually consistent Forkalope Fabric membership view over
-the Containerlab management network. `node-001` serves the Forklift UI.
+This directory contains disposable three-node Forge labs. A single lab is one
+autonomous Forkalope franchise: its own VM, Docker daemon, cluster identity,
+node inventory, and local membership view. The two-franchise exercise uses
+`forkalope-3.clab.yml` for Franchise 1 and
+`forkalope-3-franchise-2.clab.yml` for Franchise 2.
 
 Containerlab runs inside Linux because it needs Linux networking primitives
 such as network namespaces, veth links, and netlink. On macOS, the supported
@@ -11,10 +12,10 @@ shape is one ARM64 Linux VM with Docker and Containerlab inside it.
 
 ## Prerequisites
 
-The lab host is the Ubuntu VM named `ubuntu` in OrbStack. Containerlab and
-Docker must be installed in that VM, and the VM's Docker daemon must be
-running. Keep the repository somewhere under the macOS `/Users` directory so
-OrbStack exposes it at the same absolute path inside the VM.
+The first lab host is the Ubuntu VM named `ubuntu` in OrbStack. The second
+franchise uses `ubuntu-franchise-2`. Containerlab and Docker must be installed
+inside each VM, and the repository must be somewhere under `/Users` so
+OrbStack exposes the same path to both VMs.
 
 The lab commands below intentionally use `-u root`. Containerlab creates
 privileged links and namespaces, so this avoids hiding a Docker-group or
@@ -42,6 +43,12 @@ FORKALOPE_VM_NAME=ubuntu \
 FORKALOPE_UBUNTU_VERSION=24.04 \
 FORKALOPE_CONTAINERLAB_VERSION=0.79.0 \
   bash scripts/bootstrap-macos.sh
+```
+
+Prepare both franchise VMs with:
+
+```bash
+bash scripts/bootstrap-federation.sh
 ```
 
 ## Fresh Mac setup
@@ -76,11 +83,23 @@ different daemons. Use the `orb -m ubuntu ...` form for this lab.
 
 ## Deploy
 
-Build the Forge image and deploy the lab:
+Build the Forge image and deploy Franchise 1:
 
 ```bash
 bash scripts/deploy-lab.sh
 ```
+
+Deploy both isolated franchise labs:
+
+```bash
+bash scripts/deploy-lab.sh --all --reconfigure
+```
+
+Franchise 1 is served at `http://localhost:8080/forklift`; Franchise 2 is
+served at `http://localhost:8180/forklift`. Their Docker networks, cluster IDs,
+node IDs, and VM-local Docker daemons are distinct. They are not federated yet.
+The next exercise is an explicit two-sided federation contract and gateway;
+networking must not become active merely because both labs are running.
 
 If the disposable lab is already running and the image or topology changed:
 
@@ -146,14 +165,18 @@ orb -m ubuntu -u root containerlab deploy \
   --reconfigure -t "$TOPOLOGY"
 ```
 
-Containerlab writes generated inventories and state under
-`labs/containerlab/clab-forkalope-3/`. That directory is intentionally
+Containerlab writes generated inventories and state under the corresponding
+`labs/containerlab/clab-*` directory. Those directories are intentionally
 ignored by Git. The topology YAML and this README are the source of truth.
 
 Remove the disposable lab when finished:
 
 ```bash
 orb -m ubuntu -u root containerlab destroy -t "$TOPOLOGY"
+
+# For the second franchise, use its VM and topology explicitly.
+orb -m ubuntu-franchise-2 -u root containerlab destroy \
+  -t "$REPO_ROOT/labs/containerlab/forkalope-3-franchise-2.clab.yml"
 ```
 
 ## Reproducibility record
@@ -164,7 +187,7 @@ The first successful run was on 2026-09-14 with:
 - OrbStack Ubuntu `26.04.1` ARM64 VM named `ubuntu`
 - Docker `29.1.3` inside the VM
 - Containerlab `0.79.0`
-- Alpine `3.22` node image
+- `forkalope/forge:lab` node image
 
 The next networking step is to run this same membership traffic over a pinned
 Nebula deployment with disposable CA/certificate generation. The current HTTP

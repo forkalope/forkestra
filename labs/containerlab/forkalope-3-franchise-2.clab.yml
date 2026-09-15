@@ -1,0 +1,47 @@
+name: forkalope-3-franchise-2
+
+topology:
+  defaults:
+    kind: linux
+    image: forkalope/forge:lab
+
+  nodes:
+    node-001:
+      cmd: >-
+        -addr :8080 -data-dir /var/lib/forkalope -cluster-id franchise-2
+        -node-id f2-node-001 -node-name f2-node-001 -role forge -region lab-west
+        -advertise-url http://node-001:8080
+        -fabric-addresses 10.241.0.1,10.241.0.10
+        -peers http://node-002:8080
+      ports:
+        - 8180:8080
+      exec:
+        - ip addr add 10.241.0.1/30 dev eth1
+        - ip addr add 10.241.0.10/30 dev eth2
+
+    node-002:
+      cmd: >-
+        -addr :8080 -data-dir /var/lib/forkalope -cluster-id franchise-2
+        -node-id f2-node-002 -node-name f2-node-002 -role forge -region lab-east
+        -advertise-url http://node-002:8080
+        -fabric-addresses 10.241.0.2,10.241.0.5
+        -peers http://node-003:8080
+      exec:
+        - ip addr add 10.241.0.2/30 dev eth1
+        - ip addr add 10.241.0.5/30 dev eth2
+
+    node-003:
+      cmd: >-
+        -addr :8080 -data-dir /var/lib/forkalope -cluster-id franchise-2
+        -node-id f2-node-003 -node-name f2-node-003 -role forge -region lab-europe
+        -advertise-url http://node-003:8080
+        -fabric-addresses 10.241.0.6,10.241.0.9
+        -peers http://node-001:8080
+      exec:
+        - ip addr add 10.241.0.6/30 dev eth1
+        - ip addr add 10.241.0.9/30 dev eth2
+
+  links:
+    - endpoints: ["node-001:eth1", "node-002:eth1"]
+    - endpoints: ["node-002:eth2", "node-003:eth1"]
+    - endpoints: ["node-003:eth2", "node-001:eth2"]

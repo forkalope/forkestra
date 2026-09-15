@@ -6,16 +6,18 @@ usage() {
   cat <<'USAGE'
 Usage: scripts/bootstrap-macos.sh
 
-Create or start the OrbStack Ubuntu VM used by the Forkalope Containerlab
-experiments, install the VM-local Docker and Containerlab prerequisites, and
-verify that this repository is visible inside the VM.
+Create or start one OrbStack Ubuntu VM used by a Forkalope franchise,
+install that VM's Docker and Containerlab prerequisites, and verify that this
+repository is visible inside the VM.
 
 Environment overrides:
   FORKALOPE_VM_NAME             OrbStack machine name (default: ubuntu)
+  FORKALOPE_FRANCHISE           local franchise label (default: franchise-1)
   FORKALOPE_UBUNTU_VERSION      Ubuntu version (default: 24.04)
   FORKALOPE_CONTAINERLAB_VERSION Containerlab version (default: 0.79.0)
 
-The script does not deploy or destroy a lab.
+The script does not deploy or destroy a lab. Use bootstrap-federation.sh to
+prepare both local franchise VMs.
 USAGE
 }
 
@@ -55,10 +57,15 @@ command -v orb >/dev/null 2>&1 || die "OrbStack is not installed or orb is not o
 command -v orbctl >/dev/null 2>&1 || die "OrbStack is not installed or orbctl is not on PATH"
 
 vm_name="${FORKALOPE_VM_NAME:-ubuntu}"
+franchise_name="${FORKALOPE_FRANCHISE:-franchise-1}"
 ubuntu_version="${FORKALOPE_UBUNTU_VERSION:-24.04}"
 containerlab_version="${FORKALOPE_CONTAINERLAB_VERSION:-0.79.0}"
 
 [[ "$vm_name" != */* ]] || die "FORKALOPE_VM_NAME must be a simple machine name"
+case "$franchise_name" in
+  franchise-1|franchise-2) ;;
+  *) die "FORKALOPE_FRANCHISE must be franchise-1 or franchise-2" ;;
+esac
 [[ "$ubuntu_version" =~ ^[0-9]+\.[0-9]+$ ]] || \
   die "FORKALOPE_UBUNTU_VERSION must look like 24.04"
 [[ "$containerlab_version" =~ ^0\.[0-9]+\.[0-9]+$ ]] || \
@@ -66,7 +73,11 @@ containerlab_version="${FORKALOPE_CONTAINERLAB_VERSION:-0.79.0}"
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 repo_root="$(cd -- "$script_dir/.." && pwd -P)"
-topology="$repo_root/labs/containerlab/forkalope-3.clab.yml"
+if [[ "$franchise_name" == "franchise-2" ]]; then
+  topology="$repo_root/labs/containerlab/forkalope-3-franchise-2.clab.yml"
+else
+  topology="$repo_root/labs/containerlab/forkalope-3.clab.yml"
+fi
 
 case "$repo_root" in
   /Users/*) ;;
@@ -100,6 +111,9 @@ $vm_ready || die "OrbStack VM did not become ready: $vm_name"
 
 remote_prepare='set -eu
 export DEBIAN_FRONTEND=noninteractive
+# Containerlab's installer adds the invoking user to clab_admins. orb -u root
+# does not always populate USER, so make the intended administrator explicit.
+export USER="${USER:-root}"
 
 policy_file=/usr/sbin/policy-rc.d
 policy_created=false
@@ -155,4 +169,4 @@ printf '  VM:           %s\n' "$vm_name"
 printf '  Topology:     %s\n' "$topology"
 printf '  Containerlab: %s\n' "$containerlab_version"
 printf '\nNext: deploy the disposable lab with:\n'
-printf '  orb -m %s -u root containerlab deploy -t %q\n' "$vm_name" "$topology"
+printf '  bash scripts/deploy-lab.sh --franchise %s\n' "$franchise_name"

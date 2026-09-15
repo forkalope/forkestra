@@ -19,23 +19,41 @@ From the repository root:
 bash scripts/bootstrap-macos.sh
 ```
 
-The bootstrap is safe to re-run. It creates or starts the `ubuntu` ARM64 VM,
-checks the VM-local Docker daemon, installs pinned Containerlab prerequisites,
-and verifies the shared repository path. It does not deploy or destroy a lab.
+The bootstrap is safe to re-run. It creates or starts the selected ARM64 VM,
+checks that VM's Docker daemon, installs pinned Containerlab prerequisites, and
+verifies the shared repository path. It does not deploy or destroy a lab.
 
 ## First lab
 
 After bootstrapping, follow the three-node deployment and smoke-test commands
 in [labs/containerlab/README.md](labs/containerlab/README.md). The topology is
-[forkalope-3.clab.yml](labs/containerlab/forkalope-3.clab.yml).
+[forkalope-3.clab.yml](labs/containerlab/forkalope-3.clab.yml). This is
+Franchise 1: one autonomous control domain with three disposable Forge nodes.
+
+To create the two-franchise exercise, use two independent OrbStack VMs:
+
+```bash
+bash scripts/bootstrap-federation.sh
+bash scripts/deploy-lab.sh --all --reconfigure
+```
+
+Franchise 1 is served at [http://localhost:8080/forklift](http://localhost:8080/forklift)
+and Franchise 2 at [http://localhost:8180/forklift](http://localhost:8180/forklift).
+Each VM has its own Docker daemon and three-node Containerlab domain. The
+domains are intentionally isolated until an explicit federation contract is
+implemented and approved by both sides.
+
+The authority boundary and federation exercise are described in
+[`forge/docs/franchises.md`](../forge/docs/franchises.md).
 
 The current progression is intentionally incremental:
 
-1. Three native ARM64 Linux containers and point-to-point links.
-2. Real Nebula overlay and disposable certificates.
-3. Real latency/loss injection.
-4. Generated multi-region topology.
-5. One hundred nodes.
+1. One franchise: three native ARM64 Linux containers and point-to-point links.
+2. Two franchises: independent VMs, control domains, and node inventories.
+3. Bilateral federation contract and gateway between the franchises.
+4. Real Nebula overlay and disposable certificates.
+5. Real latency/loss injection and generated multi-region topology.
+6. One hundred nodes across many independently operated franchises.
 
 Generated Containerlab state stays under the lab directory and is ignored by
 Git. Topology YAML, scripts, and documentation are the source of truth.
@@ -48,6 +66,14 @@ The bootstrap script accepts these environment overrides:
 FORKALOPE_VM_NAME=ubuntu \
 FORKALOPE_UBUNTU_VERSION=24.04 \
 FORKALOPE_CONTAINERLAB_VERSION=0.79.0 \
+  bash scripts/bootstrap-macos.sh
+```
+
+The second exercise VM uses the same bootstrap contract with a different name:
+
+```bash
+FORKALOPE_VM_NAME=ubuntu-franchise-2 \
+FORKALOPE_FRANCHISE=franchise-2 \
   bash scripts/bootstrap-macos.sh
 ```
 

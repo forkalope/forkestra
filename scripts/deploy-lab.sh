@@ -4,46 +4,86 @@ set -Eeuo pipefail
 
 usage() {
   cat <<'USAGE'
-Usage: scripts/deploy-lab.sh [--reconfigure]
+Usage: scripts/deploy-lab.sh [--franchise franchise-1|franchise-2|all] [--all] [--reconfigure]
 
-Build the sibling Forge repository as forkalope/forge:lab inside the OrbStack
-Ubuntu VM, deploy the three-node Containerlab topology, and print the Forklift
-URL. Use --reconfigure to replace an already-running disposable lab.
+Build the sibling Forge repository as forkalope/forge:lab inside one or both
+OrbStack Ubuntu VMs, deploy the selected three-node franchise topology, and
+print the Forklift URL. Use --reconfigure to replace an already-running
+disposable lab.
 USAGE
 }
 
 reconfigure=false
-if [[ $# -gt 1 ]]; then
-  usage >&2
-  exit 2
-fi
-if [[ $# -eq 1 ]]; then
+franchise="franchise-1"
+while [[ $# -gt 0 ]]; do
   case "$1" in
     --reconfigure) reconfigure=true ;;
+    --all) franchise="all" ;;
+    --franchise)
+      [[ $# -ge 2 ]] || { usage >&2; exit 2; }
+      franchise="$2"
+      shift
+      ;;
     -h|--help) usage; exit 0 ;;
     *) usage >&2; exit 2 ;;
   esac
-fi
+  shift
+done
 
 command -v orb >/dev/null 2>&1 || { printf 'error: orb is not available\n' >&2; exit 1; }
 
 script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 repo_root="$(cd -- "$script_dir/.." && pwd -P)"
 forge_root="$(cd -- "$repo_root/../forge" && pwd -P)"
-topology="$repo_root/labs/containerlab/forkalope-3.clab.yml"
-vm_name="${FORKALOPE_VM_NAME:-ubuntu}"
 
 [[ -f "$forge_root/Dockerfile" ]] || { printf 'error: sibling Forge repository not found at %s\n' "$forge_root" >&2; exit 1; }
 
-printf '[lab] building forkalope/forge:lab\n'
-orb -m "$vm_name" -u root docker build -t forkalope/forge:lab "$forge_root"
+deploy_franchise() {
+  local name="$1"
+  local vm_name
+  local topology
+  local host_port
+  case "$name" in
+    franchise-1)
+      vm_name="${FORKALOPE_FRANCHISE_1_VM:-ubuntu}"
+      topology="$repo_root/labs/containerlab/forkalope-3.clab.yml"
+      host_port="8080"
+      ;;
+    franchise-2)
+      vm_name="${FORKALOPE_FRANCHISE_2_VM:-ubuntu-franchise-2}"
+      topology="$repo_root/labs/containerlab/forkalope-3-franchise-2.clab.yml"
+      host_port="8180"
+      ;;
+    *)
+      printf 'error: unknown franchise %s (use franchise-1, franchise-2, or all)\n' "$name" >&2
+      exit 2
+      ;;
+  esac
 
-deploy_args=(deploy -t "$topology")
-if $reconfigure; then
-  deploy_args+=(--reconfigure)
-fi
+  [[ -f "$topology" ]] || { printf 'error: topology not found: %s\n' "$topology" >&2; exit 1; }
+  printf '[lab] building forkalope/forge:lab in %s\n' "$vm_name"
+  orb -m "$vm_name" -u root docker build -t forkalope/forge:lab "$forge_root"
 
-printf '[lab] deploying forkalope-3\n'
-orb -m "$vm_name" -u root containerlab "${deploy_args[@]}"
+  local deploy_args=(deploy -t "$topology")
+  if $reconfigure; then
+    deploy_args+=(--reconfigure)
+  fi
 
-printf '\nForklift is served by node-001 at http://localhost:8080/forklift\n'
+  printf '[lab] deploying %s\n' "$name"
+  orb -m "$vm_name" -u root containerlab "${deploy_args[@]}"
+  printf 'Forklift %s: http://localhost:%s/forklift\n' "$name" "$host_port"
+}
+
+case "$franchise" in
+  all)
+    deploy_franchise franchise-1
+    deploy_franchise franchise-2
+    ;;
+  franchise-1|franchise-2)
+    deploy_franchise "$franchise"
+    ;;
+  *)
+    printf 'error: unknown franchise %s (use franchise-1, franchise-2, or all)\n' "$franchise" >&2
+    exit 2
+    ;;
+esac
