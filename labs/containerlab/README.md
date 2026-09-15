@@ -22,6 +22,28 @@ sudoers requirement while the lab is still being developed. The lab is
 disposable; do not use this topology as a security boundary for untrusted
 students.
 
+## Automated bootstrap
+
+From the `forkestra` repository root, run:
+
+```bash
+bash scripts/bootstrap-macos.sh
+```
+
+The script is safe to re-run. It creates the `ubuntu` VM only when it is
+missing, starts it when stopped, installs the VM-local prerequisites at pinned
+versions, checks Docker, and verifies that this repository is visible inside
+the VM. It does not deploy or destroy a lab.
+
+The defaults can be changed explicitly for another machine:
+
+```bash
+FORKALOPE_VM_NAME=ubuntu \
+FORKALOPE_UBUNTU_VERSION=24.04 \
+FORKALOPE_CONTAINERLAB_VERSION=0.79.0 \
+  bash scripts/bootstrap-macos.sh
+```
+
 ## Fresh Mac setup
 
 Install [OrbStack](https://orbstack.dev/) first. Then run these commands from
