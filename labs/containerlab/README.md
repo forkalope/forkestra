@@ -1,9 +1,9 @@
 # Forkalope Containerlab labs
 
-This directory starts with three native ARM64 Alpine Linux nodes running in
-the Ubuntu ARM64 VM managed by OrbStack. The first lab proves the Containerlab
-and Linux networking path with three point-to-point IP links; it does not
-yet start Nebula or any Forkalope service.
+This directory starts three native ARM64 Forge nodes in the Ubuntu ARM64 VM
+managed by OrbStack. The nodes retain the three point-to-point IP links and
+also exchange an eventually consistent Forkalope Fabric membership view over
+the Containerlab management network. `node-001` serves the Forklift UI.
 
 Containerlab runs inside Linux because it needs Linux networking primitives
 such as network namespaces, veth links, and netlink. On macOS, the supported
@@ -76,17 +76,27 @@ different daemons. Use the `orb -m ubuntu ...` form for this lab.
 
 ## Deploy
 
-Set the topology path once so this README works for another macOS username:
+Build the Forge image and deploy the lab:
+
+```bash
+bash scripts/deploy-lab.sh
+```
+
+If the disposable lab is already running and the image or topology changed:
+
+```bash
+bash scripts/deploy-lab.sh --reconfigure
+```
+
+Then open [http://localhost:8080/forklift](http://localhost:8080/forklift).
+The page is served from `node-001`, not from a separate frontend process.
+
+Set the topology path for the remaining direct Containerlab commands:
 
 ```bash
 REPO_ROOT="$(pwd)"
 TOPOLOGY="$REPO_ROOT/labs/containerlab/forkalope-3.clab.yml"
-
-orb -m ubuntu -u root containerlab deploy -t "$TOPOLOGY"
 ```
-
-Keep this shell open for the remaining commands, or re-run the two variable
-assignments in a new terminal.
 
 Inspect the lab:
 
@@ -156,9 +166,10 @@ The first successful run was on 2026-09-14 with:
 - Containerlab `0.79.0`
 - Alpine `3.22` node image
 
-The next step is to add a pinned Nebula binary, disposable CA/certificate
-generation, and a management/lighthouse role only after these three nodes
-deploy and pass the link checks.
+The next networking step is to run this same membership traffic over a pinned
+Nebula deployment with disposable CA/certificate generation. The current HTTP
+gossip endpoint is intentionally lab-only and unauthenticated; Nebula identity
+and a Forkalope enrollment policy must protect it before non-lab use.
 
 ## Bootstrap script plan
 

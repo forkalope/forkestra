@@ -3,21 +3,40 @@ name: forkalope-3
 topology:
   defaults:
     kind: linux
-    image: alpine:3.22
-    cmd: sleep 2147483647
+    image: forkalope/forge:lab
 
   nodes:
     node-001:
+      cmd: >-
+        -addr :8080 -data-dir /var/lib/forkalope -cluster-id forkalope-3
+        -node-id node-001 -node-name node-001 -role forge -region lab-west
+        -advertise-url http://node-001:8080
+        -fabric-addresses 10.240.0.1,10.240.0.10
+        -peers http://node-002:8080
+      ports:
+        - 8080:8080
       exec:
         - ip addr add 10.240.0.1/30 dev eth1
         - ip addr add 10.240.0.10/30 dev eth2
 
     node-002:
+      cmd: >-
+        -addr :8080 -data-dir /var/lib/forkalope -cluster-id forkalope-3
+        -node-id node-002 -node-name node-002 -role forge -region lab-east
+        -advertise-url http://node-002:8080
+        -fabric-addresses 10.240.0.2,10.240.0.5
+        -peers http://node-003:8080
       exec:
         - ip addr add 10.240.0.2/30 dev eth1
         - ip addr add 10.240.0.5/30 dev eth2
 
     node-003:
+      cmd: >-
+        -addr :8080 -data-dir /var/lib/forkalope -cluster-id forkalope-3
+        -node-id node-003 -node-name node-003 -role forge -region lab-europe
+        -advertise-url http://node-003:8080
+        -fabric-addresses 10.240.0.6,10.240.0.9
+        -peers http://node-001:8080
       exec:
         - ip addr add 10.240.0.6/30 dev eth1
         - ip addr add 10.240.0.9/30 dev eth2
