@@ -43,16 +43,21 @@ deploy_franchise() {
   local vm_name
   local topology
   local host_port
+  local peer_vm_name
+  local local_host
+  local peer_host
   case "$name" in
     franchise-1)
       vm_name="${FORKALOPE_FRANCHISE_1_VM:-ubuntu}"
       topology="$repo_root/labs/containerlab/forkalope-3.clab.yml"
       host_port="8080"
+      peer_vm_name="${FORKALOPE_FRANCHISE_2_VM:-ubuntu-franchise-2}"
       ;;
     franchise-2)
       vm_name="${FORKALOPE_FRANCHISE_2_VM:-ubuntu-franchise-2}"
       topology="$repo_root/labs/containerlab/forkalope-3-franchise-2.clab.yml"
       host_port="8180"
+      peer_vm_name="${FORKALOPE_FRANCHISE_1_VM:-ubuntu}"
       ;;
     *)
       printf 'error: unknown franchise %s (use franchise-1, franchise-2, or all)\n' "$name" >&2
@@ -61,6 +66,10 @@ deploy_franchise() {
   esac
 
   [[ -f "$topology" ]] || { printf 'error: topology not found: %s\n' "$topology" >&2; exit 1; }
+  local_host="$(orbctl list 2>/dev/null | awk -v vm="$vm_name" '$1 == vm {print $NF; exit}')"
+  peer_host="$(orbctl list 2>/dev/null | awk -v vm="$peer_vm_name" '$1 == vm {print $NF; exit}')"
+  [[ "$local_host" =~ ^[0-9a-fA-F:.]+$ ]] || { printf 'error: could not determine IP for VM %s\n' "$vm_name" >&2; exit 1; }
+  [[ "$peer_host" =~ ^[0-9a-fA-F:.]+$ ]] || { printf 'error: could not determine IP for VM %s\n' "$peer_vm_name" >&2; exit 1; }
   printf '[lab] building forkalope/forge:lab in %s\n' "$vm_name"
   orb -m "$vm_name" -u root docker build -t forkalope/forge:lab "$forge_root"
 
@@ -70,7 +79,10 @@ deploy_franchise() {
   fi
 
   printf '[lab] deploying %s\n' "$name"
-  orb -m "$vm_name" -u root containerlab "${deploy_args[@]}"
+  orb -m "$vm_name" -u root env \
+    "FORKALOPE_FRANCHISE_1_HOST=$([[ "$name" == franchise-1 ]] && printf '%s' "$local_host" || printf '%s' "$peer_host")" \
+    "FORKALOPE_FRANCHISE_2_HOST=$([[ "$name" == franchise-2 ]] && printf '%s' "$local_host" || printf '%s' "$peer_host")" \
+    containerlab "${deploy_args[@]}"
   printf 'Forklift %s: http://localhost:%s/forklift\n' "$name" "$host_port"
 }
 

@@ -97,9 +97,16 @@ bash scripts/deploy-lab.sh --all --reconfigure
 
 Franchise 1 is served at `http://localhost:8080/forklift`; Franchise 2 is
 served at `http://localhost:8180/forklift`. Their Docker networks, cluster IDs,
-node IDs, and VM-local Docker daemons are distinct. They are not federated yet.
-The next exercise is an explicit two-sided federation contract and gateway;
-networking must not become active merely because both labs are running.
+node IDs, and VM-local Docker daemons are distinct. Use the Networking view in
+each Forklift to run the explicit two-sided federation contract. Networking
+does not become active merely because both labs are running:
+
+1. In Franchise 1, click **Send proposal**.
+2. In Franchise 2, verify the peer fingerprint and click **Approve proposal**.
+3. In Franchise 1, click **Approve proposal**; its probe runs after the peer
+   approval arrives.
+4. In Franchise 2, click **Probe gateway** and confirm every checklist step is
+   complete.
 
 If the disposable lab is already running and the image or topology changed:
 

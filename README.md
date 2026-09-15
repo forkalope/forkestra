@@ -40,8 +40,8 @@ bash scripts/deploy-lab.sh --all --reconfigure
 Franchise 1 is served at [http://localhost:8080/forklift](http://localhost:8080/forklift)
 and Franchise 2 at [http://localhost:8180/forklift](http://localhost:8180/forklift).
 Each VM has its own Docker daemon and three-node Containerlab domain. The
-domains are intentionally isolated until an explicit federation contract is
-implemented and approved by both sides.
+domains stay isolated until an explicit federation contract is approved by
+both sides.
 
 The authority boundary and federation exercise are described in
 [`forge/docs/franchises.md`](../forge/docs/franchises.md).
@@ -50,7 +50,8 @@ The current progression is intentionally incremental:
 
 1. One franchise: three native ARM64 Linux containers and point-to-point links.
 2. Two franchises: independent VMs, control domains, and node inventories.
-3. Bilateral federation contract and gateway between the franchises.
+3. Bilateral federation contract and gateway between the franchises (exercise
+   it from Networking: propose, approve on each side, then probe).
 4. Real Nebula overlay and disposable certificates.
 5. Real latency/loss injection and generated multi-region topology.
 6. One hundred nodes across many independently operated franchises.

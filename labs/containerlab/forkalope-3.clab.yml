@@ -11,6 +11,10 @@ topology:
         -addr :8080 -data-dir /var/lib/forkalope -cluster-id forkalope-3
         -node-id node-001 -node-name node-001 -role forge -region lab-west
         -advertise-url http://node-001:8080
+        -franchise-id franchise-1 -franchise-name franchise-1
+        -federation-endpoint http://${FORKALOPE_FRANCHISE_1_HOST:-127.0.0.1}:8080
+        -federation-peer http://${FORKALOPE_FRANCHISE_2_HOST:-127.0.0.1}:8180
+        -federation-peer-id franchise-2
         -fabric-addresses 10.240.0.1,10.240.0.10
         -peers http://node-002:8080
       ports:
