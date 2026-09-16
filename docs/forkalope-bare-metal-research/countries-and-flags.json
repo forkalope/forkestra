@@ -1,0 +1,462 @@
+{
+  "metadata": {
+    "research_date": "2026-09-16",
+    "boundaries": "Use geographic labels neutrally; hosting location is not citizenship or provider ownership"
+  },
+  "countries": [
+    {
+      "code": "AR",
+      "name": "Argentina",
+      "emoji": "🇦🇷",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ar.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "emoji": "🇦🇺",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/au.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 50,
+      "display_anchor": {
+        "lat": -25.0,
+        "lon": 134.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "BR",
+      "name": "Brazil",
+      "emoji": "🇧🇷",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/br.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 140,
+      "display_anchor": {
+        "lat": -12.0,
+        "lon": -52.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "CH",
+      "name": "Switzerland",
+      "emoji": "🇨🇭",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ch.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "CL",
+      "name": "Chile",
+      "emoji": "🇨🇱",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/cl.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "CN",
+      "name": "China",
+      "emoji": "🇨🇳",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/cn.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "CO",
+      "name": "Colombia",
+      "emoji": "🇨🇴",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/co.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "emoji": "🇩🇪",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/de.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 1450,
+      "display_anchor": {
+        "lat": 51.0,
+        "lon": 10.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "emoji": "🇩🇰",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/dk.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "EC",
+      "name": "Ecuador",
+      "emoji": "🇪🇨",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ec.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "emoji": "🇪🇸",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/es.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 100,
+      "display_anchor": {
+        "lat": 40.2,
+        "lon": -3.7,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "emoji": "🇫🇮",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/fi.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 900,
+      "display_anchor": {
+        "lat": 64.0,
+        "lon": 26.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "emoji": "🇫🇷",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/fr.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 180,
+      "display_anchor": {
+        "lat": 46.6,
+        "lon": 2.3,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "GB",
+      "name": "United Kingdom",
+      "emoji": "🇬🇧",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/gb.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 160,
+      "display_anchor": {
+        "lat": 54.0,
+        "lon": -2.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "HK",
+      "name": "Hong Kong",
+      "emoji": "🇭🇰",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/hk.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 80,
+      "display_anchor": {
+        "lat": 22.3,
+        "lon": 114.2,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "ID",
+      "name": "Indonesia",
+      "emoji": "🇮🇩",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/id.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "IN",
+      "name": "India",
+      "emoji": "🇮🇳",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/in.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "emoji": "🇮🇹",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/it.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 120,
+      "display_anchor": {
+        "lat": 42.8,
+        "lon": 12.8,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "JP",
+      "name": "Japan",
+      "emoji": "🇯🇵",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/jp.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 100,
+      "display_anchor": {
+        "lat": 37.0,
+        "lon": 138.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "KR",
+      "name": "South Korea",
+      "emoji": "🇰🇷",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/kr.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 60,
+      "display_anchor": {
+        "lat": 36.0,
+        "lon": 128.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "emoji": "🇱🇹",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/lt.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "MX",
+      "name": "Mexico",
+      "emoji": "🇲🇽",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/mx.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "MY",
+      "name": "Malaysia",
+      "emoji": "🇲🇾",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/my.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 100,
+      "display_anchor": {
+        "lat": 4.5,
+        "lon": 109.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "emoji": "🇳🇱",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/nl.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 230,
+      "display_anchor": {
+        "lat": 52.2,
+        "lon": 5.3,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "emoji": "🇳🇿",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/nz.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 60,
+      "display_anchor": {
+        "lat": -41.0,
+        "lon": 174.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "PE",
+      "name": "Peru",
+      "emoji": "🇵🇪",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/pe.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "RU",
+      "name": "Russia",
+      "emoji": "🇷🇺",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/ru.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "emoji": "🇸🇪",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/se.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 80,
+      "display_anchor": {
+        "lat": 62.0,
+        "lon": 15.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "SG",
+      "name": "Singapore",
+      "emoji": "🇸🇬",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/sg.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 60,
+      "display_anchor": {
+        "lat": 1.35,
+        "lon": 103.82,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "TR",
+      "name": "Türkiye",
+      "emoji": "🇹🇷",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/tr.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 100,
+      "display_anchor": {
+        "lat": 39.0,
+        "lon": 35.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "TW",
+      "name": "Taiwan",
+      "emoji": "🇹🇼",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/tw.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 0,
+      "display_anchor": null
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "emoji": "🇺🇸",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/us.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 900,
+      "display_anchor": {
+        "lat": 39.0,
+        "lon": -98.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "VN",
+      "name": "Vietnam",
+      "emoji": "🇻🇳",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/vn.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 50,
+      "display_anchor": {
+        "lat": 16.0,
+        "lon": 107.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    },
+    {
+      "code": "ZA",
+      "name": "South Africa",
+      "emoji": "🇿🇦",
+      "flag_svg_url": "https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/flags/4x3/za.svg",
+      "flag_source": "https://flagicons.lipis.dev/",
+      "flag_license": "MIT; retain upstream license",
+      "flag_link_status": "constructed_from_documented_pinned_library_path; individual URLs not fetched",
+      "synthetic_node_count": 80,
+      "display_anchor": {
+        "lat": -29.0,
+        "lon": 24.0,
+        "precision": "illustrative_country_anchor_not_facility"
+      }
+    }
+  ]
+}
